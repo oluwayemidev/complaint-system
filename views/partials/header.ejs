@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My School <%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        function toggleNav(){
+            document.querySelector('.nav').classList.toggle('nav2');
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <div>
+            <% if(user) { %>
+                <h4><a href="/chat">My School</a></h4>
+                <p>Welcome, <%= user.firstName %></p>
+            <% }else { %>
+                <h4><a href="/">My School</a></h4>
+            <% } %>
+        </div>
+        <div class="navIcon" onclick="toggleNav()">
+            &#9776;
+        </div>
+        <div class="nav">
+            <% if(user) { %>
+                <a href="/logout">Logout</a>
+            <% }else { %>
+                <a href="/signup">Sign up</a>
+                <a href="/login">Login</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="container">

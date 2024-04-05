@@ -1,0 +1,76 @@
+<%- include('./partials/header.ejs') %>
+
+<form class="signup" action="/signup">
+
+    <h3>Create Account</h3>
+
+    <input type="text" name="firstName" id="firstName" placeholder="First Name" required />
+    <div class="firstName error"></div>
+
+    <input type="text" name="lastName" id="lastName" placeholder="Last Name" required />
+    <div class="lastName error"></div>
+
+    <input type="text" name="matricNumber" id="matricNumber" placeholder="Matric Number" required />
+    <div class="matricNumber error"></div>
+
+    <input type="email" name="email" id="email" placeholder="Email" required />
+    <div class="email error"></div>
+
+    <input type="password" name="password" id="password" placeholder="Password" required />
+    <div class="password error"></div>
+
+    <button type="submit">Sign up</button>
+
+</form>
+
+<script>
+    const form = document.querySelector('form');
+    const firstNameError = document.querySelector('.firstName.error');
+    const lastNameError = document.querySelector('.lastName.error');
+    const matricNumberError = document.querySelector('.matricNumber.error');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // reset errors
+        firstNameError.textContent = '';
+        lastNameError.textContent = '';
+        matricNumberError.textContent = '';
+        emailError.textContent = '';
+        passwordError.textContent = '';
+
+        // get the values
+        const firstName = form.firstName.value;
+        const lastName = form.lastName.value;
+        const matricNumber = form.matricNumber.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        try{
+            const res = await fetch('/signup', {
+                method: 'POST',
+                body: JSON.stringify({ firstName: firstName, lastName: lastName, matricNumber: matricNumber, email: email, password: password }), headers: { 'Content-Type': 'application/json' }
+            });
+
+            const data = await res.json();
+            console.log(data);
+            if(data.errors){
+                firstNameError.textContent = data.errors.firstName;
+                lastNameError.textContent = data.errors.lastName;
+                matricNumberError.textContent = data.errors.matricNumber;
+                emailError.textContent = data.errors.email;
+                passwordError.textContent = data.errors.password;
+            }
+            if(data.user){
+                location.assign('/chat');
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    })
+</script>
+
+<%- include('./partials/footer.ejs') %>
