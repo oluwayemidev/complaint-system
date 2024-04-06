@@ -1,13 +1,19 @@
 <%- include('./partials/header.ejs') %>
 
-<div class="home">
-    <div>
-        <img src="" alt="Logo">
+<% if(user){ %>
+    <script>
+        location.replace("/chat");
+    </script>
+<% }else{ %>
+    <div class="home">
+        <div>
+            <img src="/images/lasu-logo.png" alt="Logo">
+        </div>
+        <div>
+            <a href="/login">Login</a>
+            <a href="/signup">Sig up</a>
+        </div>
     </div>
-    <div>
-        <a href="/login">Login</a>
-        <a href="/signup">Sig up</a>
-    </div>
-</div>
+<% } %>
 
 <%- include('./partials/footer.ejs') %>

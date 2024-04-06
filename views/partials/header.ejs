@@ -15,12 +15,17 @@
 
     <div class="header">
         <div>
-            <% if(user) { %>
-                <h4><a href="/chat">My School</a></h4>
-                <p>Welcome, <%= user.firstName %></p>
-            <% }else { %>
-                <h4><a href="/">My School</a></h4>
-            <% } %>
+                <img src="/images/lasu-logo.png" alt="">
+                <% if(user) { %>
+                    <div>
+                        <h4><a href="/chat">LASUSTECH Complaint Centre</a></h4>
+                        <p>Welcome, <%= user.firstName %> (<%= user.email %>)</p>
+                    </div>
+                <% }else { %>
+                    <div>
+                        <h4><a href="/">LASUSTECH Complaint Centre</a></h4>
+                    </div>
+                <% } %>
         </div>
         <div class="navIcon" onclick="toggleNav()">
             &#9776;

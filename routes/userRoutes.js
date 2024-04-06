@@ -8,17 +8,7 @@ const jwt = require('jsonwebtoken')
 // handle errors
 const handleErrors = (err) => {
     console.log(err.message, err.code)
-    let errors = { firstName: '', lastName: '', matricNumber: '', email: '', password: '' }
-
-    // incorrect firstName
-    // if(err.message === ''){
-    //     errors.firstName = 'Fill in this field'
-    // }
-
-    // incorrect lastName
-    // if(err.message === ''){
-    //     errors.lastName = 'Fill in this field'
-    // }
+    let errors = { email: '', password: '' }
 
     // incorrect email
     if(err.message === 'incorrect email'){
